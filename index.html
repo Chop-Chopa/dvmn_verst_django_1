@@ -62,6 +62,7 @@
   background-color: red;
   }
   .viewing-slider {
+  opacity: 0;
   height: 8.2px;
   width: 8.2px;
   border-radius: 50%;
@@ -71,6 +72,15 @@
   border-width: 2.6px;
   display: inline-block;
   margin: 0px 0px 0px -7px;
+  transition-property: opacity;
+  transition-duration: .3s;
+  transition-timing-function: easy-in;
+  }
+  .viewing-panel:hover .viewing-slider {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: .3s;
+  transition-timing-function: easy-in;
   }
   </style>
 
