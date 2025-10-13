@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8">
     <title>VideoPlayer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="normalize.css">
   </head>
   <style type="text/css">
+  body {
+  margin: 8px;
+  }
   .player {
   display: flex;
   flex-direction: column;
@@ -26,6 +30,14 @@
   color: white;
   background-color: inherit;
   background: black;
+  }
+  .player-button:focus {
+  outline: none;
+  }
+  .player-button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  border-radius: 4px;
   }
   .video-screen {
   display: flex;
@@ -48,12 +60,10 @@
   }
   .viewing-panel {
   height: 5px;
-  border-radius: 10px;
   margin: 0px 10px 0px 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: grey;
   flex-grow: 1;
   }
   .viewing-slider-line {
