@@ -20,7 +20,7 @@
   .player-button {
   font-size: 18px;
   padding: 8px;
-  margin: 5px;
+  margin: 3px;
   border:none;
   cursor:pointer;
   color: white;
@@ -46,8 +46,31 @@
   font-variation-settings: "wdth" 100;
   color: white;
   }
-  .spacer {
+  .viewing-panel {
+  height: 5px;
+  border-radius: 10px;
+  margin: 0px 10px 0px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: grey;
   flex-grow: 1;
+  }
+  .viewing-slider-line {
+  border-radius: 10px;
+  height: 5px;
+  background-color: red;
+  }
+  .viewing-slider {
+  height: 8.2px;
+  width: 8.2px;
+  border-radius: 50%;
+  background-color: #f8104d;
+  border-style: solid;
+  border-color: white;
+  border-width: 2.6px;
+  display: inline-block;
+  margin: 0px 0px 0px -7px;
   }
   </style>
 
@@ -76,7 +99,10 @@
             <span class="js-current-time"></span>
           </div>
 
-          <div class="spacer"></div>
+          <div class="js-progress viewing-panel">
+            <div class="js-progress-slider viewing-slider-line"></div>
+            <div><span class="viewing-slider"></span></div>
+          </div>
 
           <div class="timer">
             <span class="js-duration"></span>
