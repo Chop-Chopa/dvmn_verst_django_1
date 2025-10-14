@@ -2,143 +2,145 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VideoPlayer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="normalize.css">
+
+    <style>
+      body {
+        margin: 8px;
+      }
+      .player {
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
+        width: 800px;
+        height: 600px;
+        background: black;
+      }
+      .player-button {
+        font-size: 18px;
+        padding: 8px;
+        margin: 3px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        background-color: inherit;
+        background: black;
+      }
+      .player-button:focus {
+        outline: none;
+      }
+      .player-button:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+      .video-screen {
+        display: flex;
+        flex-grow: 1;
+      }
+      .player-button-wrapper {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background: black;
+      }
+      .timer {
+        color: white;
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+        font-size: 16px;
+      }
+      .progress-block {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        margin: 0 10px;
+      }
+      .viewing-panel {
+        height: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-grow: 1;
+        margin: 0 10px;
+      }
+      .viewing-slider-line {
+        border-radius: 10px;
+        height: 5px;
+        background-color: red;
+        width: 100%;
+      }
+      .viewing-slider {
+        opacity: 0;
+        height: 8.2px;
+        width: 8.2px;
+        border-radius: 50%;
+        background-color: #f8104d;
+        border-style: solid;
+        border-color: white;
+        border-width: 2.6px;
+        display: inline-block;
+        margin: 0 0 0 -7px;
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in;
+      }
+      .viewing-panel:hover .viewing-slider {
+        opacity: 1;
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in;
+      }
+    </style>
   </head>
-  <style type="text/css">
-  body {
-  margin: 8px;
-  }
-  .player {
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.75);
-  width: 800px;
-  height: 600px;
-  background: black;
-  }
-  .player-button {
-  font-size: 18px;
-  padding: 8px;
-  margin: 3px;
-  border:none;
-  cursor:pointer;
-  color: white;
-  background-color: inherit;
-  background: black;
-  }
-  .player-button:focus {
-  outline: none;
-  }
-  .player-button:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 2px;
-  border-radius: 4px;
-  }
-  .video-screen {
-  display: flex;
-  flex-grow: 1;
-  }
-  .player-button-wrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background: black;
-  }
-  .timer {
-  color: white;
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
-  color: white;
-  }
-  .viewing-panel {
-  height: 5px;
-  margin: 0px 10px 0px 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-grow: 1;
-  }
-  .viewing-slider-line {
-  border-radius: 10px;
-  height: 5px;
-  background-color: red;
-  }
-  .viewing-slider {
-  opacity: 0;
-  height: 8.2px;
-  width: 8.2px;
-  border-radius: 50%;
-  background-color: #f8104d;
-  border-style: solid;
-  border-color: white;
-  border-width: 2.6px;
-  display: inline-block;
-  margin: 0px 0px 0px -7px;
-  transition-property: opacity;
-  transition-duration: .3s;
-  transition-timing-function: easy-in;
-  }
-  .viewing-panel:hover .viewing-slider {
-  opacity: 1;
-  transition-property: opacity;
-  transition-duration: .3s;
-  transition-timing-function: easy-in;
-  }
-  </style>
 
   <body>
     <div id="player" class="player">
-        <div class="video-screen js-video-container"></div>
-
-        <div class = "player-button-wrapper">
-          <button class="player-button js-play-button">
-            <i class="fa fa-play" aria-hidden="true"></i>
-          </button>
-
-          <button class="player-button js-pause-button">
-            <i class="fa fa-pause" aria-hidden="true"></i>
-          </button>
-
-          <button class="player-button js-mute-button">
-            <i class="fa fa-volume-up" aria-hidden="true"></i>
-          </button>
-
-          <button class="player-button js-volume-button">
-            <i class="fa fa-volume-off" aria-hidden="true"></i>
-          </button>
-
+      <div class="video-screen js-video-container"></div>
+      <div class="player-button-wrapper">
+        <button class="player-button js-play-button">
+          <i class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <button class="player-button js-pause-button">
+          <i class="fa fa-pause" aria-hidden="true"></i>
+        </button>
+        <button class="player-button js-mute-button">
+          <i class="fa fa-volume-up" aria-hidden="true"></i>
+        </button>
+        <button class="player-button js-volume-button">
+          <i class="fa fa-volume-off" aria-hidden="true"></i>
+        </button>
+        <div class="progress-block">
           <div class="timer">
             <span class="js-current-time"></span>
           </div>
-
           <div class="js-progress viewing-panel">
             <div class="js-progress-slider viewing-slider-line"></div>
             <div><span class="viewing-slider"></span></div>
           </div>
-
           <div class="timer">
             <span class="js-duration"></span>
           </div>
-
-          <button class="player-button js-fullscreen-button">
-            <i class="fa fa-expand" aria-hidden="true"></i>
-          </button>
         </div>
+        <button class="player-button js-fullscreen-button">
+          <i class="fa fa-expand" aria-hidden="true"></i>
+        </button>
+      </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://unpkg.com/playable@2.10.3/dist/statics/playable.bundle.min.js"></script>
     <script src="player.js"></script>
-
-    <script type="text/javascript">
-      createPlayer({elementId: 'player'});
+    <script>
+      createPlayer({ elementId: "player" });
     </script>
   </body>
 </html>
